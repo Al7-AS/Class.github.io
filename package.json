@@ -1,0 +1,60 @@
+{
+  "name": "classmind-ai",
+  "version": "7.2.0",
+  "description": "ClassMind AI - Arabic educational center management desktop application",
+  "main": "src/main.js",
+  "author": "Engineer Ali Ashraf",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check src/main.js && node --check src/preload.js && node --check src/app.js && node --check src/fx.js",
+    "build:win:portable": "electron-builder --win portable --x64",
+    "build:win:installer": "electron-builder --win nsis --x64",
+    "build:win:both": "electron-builder --win portable nsis --x64"
+  },
+  "devDependencies": {
+    "electron": "35.7.5",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "com.aliashraf.classmindai",
+    "productName": "ClassMind AI",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json",
+      "!**/*.map"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "ClassMind-AI-${version}-${arch}.${ext}",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "portable": {
+      "artifactName": "ClassMind-AI-${version}-Portable.${ext}"
+    }
+  }
+}
